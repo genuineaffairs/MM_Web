@@ -14,7 +14,7 @@ const app = express();
 //     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 //   }),
 // )
-app.use(cors())
+app.use('*', cors())
 app.use(helmet()); 
 app.use(fileUpload());
 app.use(bodyParser.json());
