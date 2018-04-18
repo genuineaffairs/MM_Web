@@ -75,15 +75,12 @@ export default {
   deletePhoto(key, photoId, targetPhoto) {
     return async (dispatch, getState) => {
       try {
-        let { userPhotos, accountData } = getState();
-        const { id } = accountData;
-        let newUserPhotos = JSON.parse(JSON.stringify(userPhotos))
+        const { id } = getState().accountData;
         await axios
           .delete(`${S3_SERVER_URL}/api/s3/${id}/${key}/${photoId}`)
-        newUserPhotos.splice(targetPhoto, 1)
         dispatch({
           type: 'USER_PHOTO_DELETED',
-          payload: newUserPhotos,
+          payload: targetPhoto,
         });
       } catch (err) {
         console.error
