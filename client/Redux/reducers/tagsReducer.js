@@ -8,12 +8,12 @@ let entryState =
 
 
 
-export default (state = entryState, action) => {
-  switch (action.type) {
+export default (state = entryState, { type, payload }) => {
+  switch (type) {
     case 'USER_TAGS_RECIEVED':
-      return (state = action.payload);
+      return { ...state, ...payload};
     case 'USER_TAGS_UPDATED':
-      return (state = action.payload);
+      return { ...state, [payload.type]: payload.tags}
     default:
       return state;
   }

@@ -41,15 +41,12 @@ export default {
   updateTagsData(type, tags) {
     return async (dispatch, getState) => {
       try {
-        const tagState = getState().tags;
         const { id } = getState().accountData;
-        tagState[type] = tags;
-        const newTagState = JSON.parse(JSON.stringify(tagState));
         await axios
           .put(`${REST_SERVER_URL}/api/tags/userAndPreferenceTags/${type}/${id}`, tags)
         dispatch({
           type: 'USER_TAGS_UPDATED',
-          payload: newTagState
+          payload: {tags: tags, type: type}
         });
       } catch (err) {
         console.error
