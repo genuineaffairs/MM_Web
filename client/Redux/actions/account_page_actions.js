@@ -93,17 +93,12 @@ export default {
   updatePrimaryPhoto(photoId, targetPhoto) {
     return async (dispatch, getState) => {
       const { id } = getState().accountData;
-      const { userPhotos } = getState();
-      const newUserPhotos = JSON.parse(JSON.stringify(userPhotos))
-      const newPrimary = newUserPhotos[targetPhoto];
-      newUserPhotos.splice(targetPhoto, 1)
-      newUserPhotos.unshift(newPrimary)
       try {
         await axios.
           put(`${REST_SERVER_URL}/api/photos/updatePrimaryPhoto/${id}/${photoId}`)
         dispatch({
           type: 'USER_PRIMARY_PHOTO_UPDATED',
-          payload: newUserPhotos
+          payload: targetPhoto
         });
       } catch (err) {
         console.error
@@ -113,13 +108,16 @@ export default {
   updateSignupStatus() {
     return async (dispatch, getState) => {
       try {
+        const { signupStatus } = getState();
         const { id } = getState().accountData;
         const signupStatusData = { signupcomplete: 1, id: id };
-        await axios
-          .put(`${REST_SERVER_URL}/api/users/updateUserInfo`, signupStatusData)
-        dispatch({
-          type: 'SIGNUP_COMPLETE'
-        });
+        if (!signupStatus) {
+          await axios
+            .put(`${REST_SERVER_URL}/api/users/updateUserInfo`, signupStatusData)
+          dispatch({
+            type: 'SIGNUP_COMPLETE'
+          });
+        }
       } catch (err) {
         console.error
       }

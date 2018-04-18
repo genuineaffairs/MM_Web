@@ -15,10 +15,11 @@ export default (state = initialState, { type, payload }) => {
   switch (type) {
     case 'RATINGS_DATA_RECIEVED':
       return payload;
-    case 'RATING_SUBMITTED': 
+    case 'RATING_SUBMITTED': {
       let rest = state;
       rest.pop()
       return [...rest]
+    }
     case 'ADDITIONAL_USERS_TO_RATE_ADDED':
       return [ ...payload, ...state ];
     default:
