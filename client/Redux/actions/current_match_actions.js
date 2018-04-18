@@ -5,8 +5,7 @@ const { REST_SERVER_URL } = process.env;
 export default {
   acceptCurrentMatch() {
     return async (dispatch, getState) => {
-      const { currentMatch } = getState();
-      const matchId = currentMatch.id;
+      const matchId = getState().currentMatch.id;
       const userId = getState().accountData.id;
       try {
         await axios

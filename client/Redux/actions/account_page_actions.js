@@ -59,12 +59,12 @@ export default {
       try {
         await axios
           .post(`${S3_SERVER_URL}/api/s3`, formData);
-        const photoData = await axios
+        const { data } = await axios
           .get(`${REST_SERVER_URL}/api/photos/fetchAllPhotos/${id}`)
         setTimeout(() => {
           dispatch({
             type: 'USER_PHOTO_ADDED',
-            payload: photoData.data
+            payload: data
           });
         }, 2000)
       } catch (err) {

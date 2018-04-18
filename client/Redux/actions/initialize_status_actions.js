@@ -8,7 +8,6 @@ export default {
       let { initializeState } = getState();
       console.log('initialize state from actions', initializeState)
       try {
-        console.log('hello ')
         dispatch({
           type: 'INITIALIZE_STATUS_TRUE',
         })

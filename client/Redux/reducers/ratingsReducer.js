@@ -16,9 +16,9 @@ export default (state = initialState, { type, payload }) => {
     case 'RATINGS_DATA_RECIEVED':
       return payload;
     case 'RATING_SUBMITTED': {
-      let rest = state;
+      let rest = [...state];
       rest.pop()
-      return [...rest]
+      return rest;
     }
     case 'ADDITIONAL_USERS_TO_RATE_ADDED':
       return [ ...payload, ...state ];
