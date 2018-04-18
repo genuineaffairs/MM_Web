@@ -1,14 +1,10 @@
-
-let entryState = 
+let initialState = 
   {
     user: [], 
     pref: [],
   }
 
-
-
-
-export default (state = entryState, { type, payload }) => {
+export default (state = initialState, { type, payload }) => {
   switch (type) {
     case 'USER_TAGS_RECIEVED':
       return { ...state, ...payload};
