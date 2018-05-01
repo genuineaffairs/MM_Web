@@ -8,13 +8,12 @@ export const fetchStarredMatchesHelper = () => {
   `;
 };
 
-export const fetchUnstarredMatchesHelper = () => {
+export const fetchAllMatchesHelper = () => {
   return `
   SELECT match.id, user1_id, user2_id, activevoting, starred, decision FROM MATCH
   INNER JOIN outcomes
   ON match.id=outcomes.matchid
-  WHERE starred=0
-  AND outcomes.userid=$1
+  WHERE outcomes.userid=$1
   ORDER BY match.id
   LIMIT 10;
   `;

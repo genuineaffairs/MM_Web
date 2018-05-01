@@ -1,6 +1,6 @@
 import {
   fetchStarredMatchesQuery,
-  fetchUnstarredMatchesQuery,
+  fetchAllMatchesQuery,
   starSingleMatchQuery,
   unstarSingleMatchQuery
 } from './outcomesQueries';
@@ -16,12 +16,12 @@ export const fetchStarredMatchesController = async (req, res) => {
   }
 };
 
-export const fetchUnstarredMatchesController = async (req, res) => {
+export const fetchAllMatchesController = async (req, res) => {
   try {
-    const data = await fetchUnstarredMatchesQuery(req.params);
+    const data = await fetchAllMatchesQuery(req.params);
     return res.status(200).send(data);
   } catch (err) {
-    console.log('Error on fetchUnstarredMatchesController', err);
+    console.log('Error on fetchAllMatchesController', err);
   }
 };
 

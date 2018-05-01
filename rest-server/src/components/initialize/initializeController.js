@@ -10,7 +10,7 @@ import {
 
 import {
   fetchStarredMatchesQuery,
-  fetchUnstarredMatchesQuery
+  fetchAllMatchesQuery
 } from '../outcomes/outcomesQueries';
 
 import { fetchStageTwoQuery } from '../stageTwo/stageTwoQueries';
@@ -61,7 +61,7 @@ export const fetchInitializeController = async (req, res) => {
 
     data.outcomesData = {
       starred: await fetchStarredMatchesQuery(req.params),
-      allOthers: await fetchUnstarredMatchesQuery(req.params)
+      allOthers: await fetchAllMatchesQuery(req.params)
     };
 
     data.currentMatchData = await fetchStageTwoQuery(req.params);

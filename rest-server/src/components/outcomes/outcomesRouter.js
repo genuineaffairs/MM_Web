@@ -2,7 +2,7 @@ import express from 'express';
 
 import {
   fetchStarredMatchesController,
-  fetchUnstarredMatchesController,
+  fetchAllMatchesController,
   starSingleMatchController,
   unstarSingleMatchController
 } from './outcomesControllers';
@@ -12,8 +12,8 @@ const router = express.Router();
 router.route('/fetchStarredMatches/:userId').get(fetchStarredMatchesController);
 
 router
-  .route('/fetchUnstarredMatches/:userId')
-  .get(fetchUnstarredMatchesController);
+  .route('/fetchAllMatches/:userId')
+  .get(fetchAllMatchesController);
 
 router
   .route('/starSingleMatch/:userId/:matchId')

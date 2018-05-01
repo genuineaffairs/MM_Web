@@ -2,7 +2,7 @@ import db from '../../config/database/index';
 
 import {
   fetchStarredMatchesHelper,
-  fetchUnstarredMatchesHelper,
+  fetchAllMatchesHelper,
   starSingleMatchHelper,
   unstarSingleMatchHelper,
   addOutcomesHelper,
@@ -82,9 +82,9 @@ export const fetchStarredMatchesQuery = async ({ userId }) => {
   }
 };
 
-export const fetchUnstarredMatchesQuery = async ({ userId }) => {
+export const fetchAllMatchesQuery = async ({ userId }) => {
   try {
-    const { rows } = await db.query(fetchUnstarredMatchesHelper(), [userId]);
+    const { rows } = await db.query(fetchAllMatchesHelper(), [userId]);
     for (let match of rows) {
       match.user1_id = await fetchSingleUsersQuery({ userId: match.user1_id });
       match.user2_id = await fetchSingleUsersQuery({ userId: match.user2_id });
