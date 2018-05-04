@@ -5,6 +5,7 @@ export const fetchStarredMatchesHelper = () => {
   ON match.id=outcomes.matchid
   WHERE starred=1
   AND outcomes.userid=$1
+  ORDER BY match.id DESC
   `;
 };
 
@@ -14,7 +15,7 @@ export const fetchAllMatchesHelper = () => {
   INNER JOIN outcomes
   ON match.id=outcomes.matchid
   WHERE outcomes.userid=$1
-  ORDER BY match.id
+  ORDER BY match.id DESC
   LIMIT 10;
   `;
 };
