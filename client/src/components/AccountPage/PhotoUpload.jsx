@@ -6,8 +6,6 @@ import Button from '../globals/Button/index.jsx';
 import actions from '../../../Redux/actions/account_page_actions';
 import style from './AccountPage.css';
 
-const { S3_SERVER_URL } = process.env;
-
 class PhotoUpload extends Component {
   constructor() {
     super();

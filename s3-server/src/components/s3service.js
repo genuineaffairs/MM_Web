@@ -21,12 +21,14 @@ exports.deletePhoto = (bucketName, keyName, cb ) => {
 }
 
 exports.addPhoto = (bucket, file, filename, cb) => {
+  const buf = Buffer.from(file, 'base64');
   s3.upload({
     Bucket: bucket,
     Key: filename,
-    Body: file.data,
+    Body: buf,
     ACL: 'public-read',
-    ContentType: 'image/png'
+    ContentType: 'image/jpeg',
+    ContentEncoding: 'base64',
   }, (err, data) => {
     if (err) {
       console.error(`error uploading photo: ${filename}`, err)
