@@ -3,7 +3,8 @@ import express from 'express';
 import {
   fetchAllTagsController,
   fetchUserAndTheirPreferenceTagsController,
-  putUserAndPreferenceTagsController
+  putUserAndPreferenceTagsController,
+  saveTagsController,
 } from '../tags/tagsController';
 
 const router = express.Router();
@@ -19,5 +20,9 @@ router
 router
   .route('/userAndPreferenceTags/:type/:userId/')
   .put(putUserAndPreferenceTagsController);
+
+router
+  .route('/saveTags/:userId/')
+  .put(saveTagsController);
 
 export default router;

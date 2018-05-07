@@ -28,8 +28,19 @@ export const putUserAndPreferenceTagsController = async (req, res) => {
     const { type, userId } = req.params;
     const binaryType = type === 'user' ? 0 : 1;
     await putUserAndPreferencesTagsQuery(userId, req.body, binaryType);
-    res.status(200).send('Successful deletion');
+    res.status(200).send('[Web] Added Tags');
   } catch (err) {
     console.log('Error on putUserAndPreferenceTagsController', err);
+  }
+};
+
+  export const saveTagsController = async (req, res) => {
+    try {
+      const { userId } = req.params;
+      await putUserAndPreferencesTagsQuery(userId, req.body.user, 0);
+      await putUserAndPreferencesTagsQuery(userId, req.body.pref, 1);
+      res.status(200).send('[Mobile] Added Tags');
+    } catch (err) {
+      console.log('Error on saveTagsController', err);
   }
 };
