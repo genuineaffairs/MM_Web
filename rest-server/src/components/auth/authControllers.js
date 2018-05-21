@@ -2,8 +2,10 @@ import db from '../../config/database/index';
 import {
   loginQuery,
   signupQuery,
-  logoutQuery
 } from './authQueries'
+import {
+  updateUserInfoQuery,
+} from '../users/userQueries';
 import {
   generateToken
 } from '../../middleware/auth/jwt';
@@ -34,6 +36,17 @@ export const signupController = async (req, res) => {
     const token = await generateToken(id, username);
     rows[0].token = token.accessToken;
     return res.status(200).append('Authorization', JSON.stringify(token)).send(rows[0]);
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+export const changePasswordController = async (req, res) => {
+  try {
+    req.body.password = await hashPassword(req.body.newPassword);
+    delete req.body.newPassword;
+    const data = await updateUserInfoQuery(req.body);
+    return res.status(200).send(data);
   } catch (err) {
     throw new Error(err);
   }

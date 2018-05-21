@@ -27,7 +27,7 @@ export const updateUserAttractivenessController = async (req, res) => {
       ratee: req.body.ratee
     };
     await updateRaterRateeRelationshipQuery(raterRatee);
-    return res.send('user attractiveness updated');
+    return res.status(200).send('valid');
   } catch (err) {
     console.error;
   }

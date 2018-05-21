@@ -21,7 +21,7 @@ class Login extends Component {
     const { username, password } = this.state;
     e.preventDefault();
     const body = {
-      username,
+      username  ,
       password
     };
     try {

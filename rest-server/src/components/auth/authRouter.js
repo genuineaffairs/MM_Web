@@ -4,7 +4,8 @@ import passport from 'passport';
 import {
   loginController,
   signupController,
-  logoutController
+  logoutController,
+  changePasswordController
 } from './authControllers';
 
 import '../../middleware/validation/passport';
@@ -16,6 +17,9 @@ router.route('/login')
 
 router.route('/signup')
   .post(signupController);
+
+router.route('/changepassword')
+  .post(passport.authenticate('local', { session: false }), changePasswordController);
 
 router.route('/logout')
   .get(logoutController);

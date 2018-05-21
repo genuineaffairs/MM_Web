@@ -87,13 +87,12 @@ class BioInfo extends Component {
       this.setState(ageState)
     }
 
-    const bioState = {
+    this.setState({
       location: this.props.location,
       bio: this.props.bio,
       gender: this.props.gender,
       pref: this.props.pref,
-    }
-    this.setState(bioState)
+    })
 
     this.props.setIndexState(bioState, ageState)
   }

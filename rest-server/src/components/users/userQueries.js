@@ -18,7 +18,7 @@ import {
 
 
 
-export const fetchAllUsersQuery = async body => {
+export const fetchAllUsersQuery = async () => {
   try {
     const { rows } = await db.query(fetchAllUsersHelper());
     for (let user of rows) {
@@ -30,7 +30,7 @@ export const fetchAllUsersQuery = async body => {
   }
 };
 
-export const fetchSingleUsersQuery = async body => {
+export const fetchSingleUsersQuery = async (body) => {
   try {
     const { userId } = body;
     const queryString = fetchSingleUserHelper();
@@ -52,12 +52,10 @@ export const fetchUsersTagsForRatingQuery = async (body) => {
   }
 };
 
-export const updateUserInfoQuery = async body => {
+export const updateUserInfoQuery = async (body) => {
   try {
-   
-    let data;
     for (let key in body) {
-      if (key === 'id' || key === 'username') {
+      if (key === 'id') {
         continue;
       } else {
         if (
@@ -69,7 +67,7 @@ export const updateUserInfoQuery = async body => {
           body[key] = Number(body[key]);
         }
         let queryString = updateUserInfoHelper(key, body[key], body.id);
-        data = await db.query(queryString, [body[key]]);
+        await db.query(queryString, [body[key]]);
         console.log('success on userInfoQuery');
       }
     }
